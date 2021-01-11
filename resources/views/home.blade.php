@@ -1,23 +1,19 @@
-@extends('layouts.app')
-
+@extends('layouts.observerLayout')
+@section('title', 'Home')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-content center">
+        <h3 class="secondary-text"><b>Welcome to ITC Observer Panel</b></h3>
+        <h4>v.2.0</h4>
+        <img src="{{ asset('img/anmlogo.gif') }}" class="responsive-img" alt="" srcset="">
     </div>
 </div>
 @endsection
+
+@if (Session::get('status') == 2)
+@section('js')
+<script>
+    M.toast({html: 'Anda sudah menginputkan peserta !'})
+</script>
+@endsection
+@endif

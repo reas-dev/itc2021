@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,24 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function redirectTo(){
+
+        // User role
+        $role = Auth::user()->role;
+
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return '/admin';
+                break;
+            case 'participant':
+                    return '/';
+                break;
+            default:
+                    return '/login';
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.
@@ -50,9 +69,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'min:4', 'max:50'],
+            'email' => ['required', 'string', 'email:rfc', 'min:10', 'max:50','unique:users'],
+            'username' => ['required', 'string', 'min:4', 'max:16','unique:users', 'alpha_num'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'key-access' => [
+                'required',
+                Rule::in(['macanfasilkom', 'collaborative']),
+            ],
         ]);
     }
 
@@ -64,10 +88,29 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if ($data['key-access'] == 'macanfasilkom')
+        {
+            return User::create([
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'role' => 'participant',
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+        elseif ($data['key-access'] == 'collaborative')
+        {
+            return User::create([
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'role' => 'admin',
+                'password' => Hash::make($data['password']),
+            ]);
+        }
+        else
+        {
+            return back();
+        }
     }
 }
