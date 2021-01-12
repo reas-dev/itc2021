@@ -15,7 +15,7 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->integer('user_id');
             $table->string('name',50);
             $table->string('school',50);
             $table->dateTime('absent')->nullable();

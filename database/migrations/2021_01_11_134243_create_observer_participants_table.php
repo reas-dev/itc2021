@@ -15,9 +15,8 @@ class CreateObserverParticipantsTable extends Migration
     {
         Schema::create('observer_participants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('observer_id');
-            $table->foreign('observer_id')->references('id')->on('users');
-            $table->foreignId('participant_id')->constrained('participants');
+            $table->bigInteger('observer_id');
+            $table->bigInteger('participant_id');
             $table->integer('session');
             $table->softDeletes();
             $table->timestamps();

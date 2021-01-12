@@ -42,10 +42,10 @@ class RegisterController extends Controller
                     return '/admin';
                 break;
             case 'participant':
-                    return '/';
+                    return '/participant';
                 break;
             default:
-                    return '/login';
+                    return '/logout';
                 break;
         }
     }

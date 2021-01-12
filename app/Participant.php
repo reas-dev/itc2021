@@ -9,6 +9,7 @@ use Kyslik\ColumnSortable\Sortable;
 class Participant extends Model
 {
     use SoftDeletes;
+    use Sortable;
 
     protected $table = "participants";
     protected $fillable= ['name', 'school','absent','point_1','point_2','point_3','point_4','status'];
