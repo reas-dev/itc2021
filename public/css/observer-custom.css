@@ -131,6 +131,10 @@ nav .brand-logo {
     display: inline;
 }
 
+.prime-red {
+    color: #ee6e73 !important;
+}
+
 [type=radio]:not(:checked)+span,
 [type=radio]:checked+span {
     padding-right: 10px;

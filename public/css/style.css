@@ -2,6 +2,10 @@
     min-height: 80vh;
 }
 
+.min-vh-20 {
+    min-height: 20vh;
+}
+
 
 .bg-wave-head {
     background-image: url("/svg/image1.svg");
@@ -17,23 +21,23 @@
 
 .blue-btn {
     border-radius: 10px !important;
-    color: #fff;
-    background-color: #4f84ec;
-    border-color: #4f84ec;
+    color: black;
+    background-color: #5c6bc0;
+    border-color: #5c6bc0;
 }
 
 .yellow-btn {
     border-radius: 10px !important;
-    color: rgb(0, 0, 0);
-    background-color: #fcbf3d;
-    border-color: #fcbf3d;
+    color: black;
+    background-color: #ffca28;
+    border-color: #ffca28;
 }
 
 .green-btn {
     border-radius: 10px !important;
-    color: #fff;
-    background-color: #7acc5d;
-    border-color: #7acc5d;
+    color: black;
+    background-color: #26a69a;
+    border-color: #26a69a;
 }
 
 .red-btn {

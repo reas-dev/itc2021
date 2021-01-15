@@ -99,11 +99,10 @@
                           @enderror
                         </div>
                     </div>
-                      <div class="row">
+                    <div class="row">
                         <button type="submit" class="btn btn-large btn-block">
                             {{ __('Register') }}
                         </button>
-                      </div>
                     </div>
                 </div>
             </div>

@@ -31,12 +31,15 @@
                 <a href="#email"><span class="white-text email">{{ $user->email }}</span></a>
             </div>
         </li>
-        <li class="{{ (request()->is('observer')) ? 'active' : '' }}"><a class="waves-effect white-text"
-                href="{{ url('observer') }}"><i class="material-icons white-text">home</i>Home</a></li>
+        <li class="{{ (request()->is('participant')) ? 'active' : '' }}"><a class="waves-effect white-text"
+                href="{{ url('participant') }}"><i class="material-icons white-text">home</i>Home</a></li>
+        <li>
+        <li class="{{ (request()->is('participant/profile')) ? 'active' : '' }}"><a class="waves-effect white-text"
+                href="{{ url('participant/profile') }}"><i class="material-icons white-text">person</i>Profile</a></li>
         <li>
         <div class="divider"></div>
-        <li class="{{ (request()->is('observer/answer')) ? 'active' : '' }}"><a class="waves-effect white-text"
-                href="{{ url('observer/answer') }}"><i class="material-icons white-text">assignment</i>Scoring</a></li>
+        <li class="{{ (request()->is('participant/answer')) ? 'active' : '' }}"><a class="waves-effect white-text"
+                href="{{ url('participant/answer') }}"><i class="material-icons white-text">assignment</i>Competition</a></li>
         <div class="divider"></div>
         <li class=""><a class="waves-effect white-text" href="{{ url('logout') }}"><i
                     class="material-icons white-text">power_settings_new</i>Logout</a>
@@ -100,7 +103,7 @@
             title: 'Ups!',
             text: 'Sesi telah berakhir',
             showConfirmButton: false,
-            timer: 1200
+            timer: 1500
         })
     </script>
     @elseif (Session::has('status') && Session::get('status') == 'profile-done')
@@ -121,16 +124,6 @@
             text: 'Jawaban sudah disimpan',
             showConfirmButton: false,
             timer: 1000
-        })
-    </script>
-    @elseif (Session::has('status') && Session::get('status') == 'SessionNotBegin')
-    <script>
-        Swal.fire({
-            icon: 'warning',
-            title: 'Ups!',
-            text: 'Sesi belum dimulai',
-            showConfirmButton: false,
-            timer: 1200
         })
     </script>
     @endif

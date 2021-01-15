@@ -13,6 +13,7 @@
         <tr>
           <th>No</th>
           <th>Nama</th>
+          <th>Telepon</th>
           <th>Sekolah</th>
           <th>S-1</th>
           <th>S-2</th>
@@ -29,6 +30,7 @@
         <tr>
           <td>{{ $participant->id }}</td>
           <td>{{ $participant->name }}</td>
+          <td>{{ $participant->phone }}</td>
           <td>{{ $participant->school }}</td>
           <td>{{ $participant->point_1 }}</td>
           <td>{{ $participant->point_2 }}</td>

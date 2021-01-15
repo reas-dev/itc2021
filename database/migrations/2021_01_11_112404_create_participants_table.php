@@ -17,6 +17,7 @@ class CreateParticipantsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name',50);
+            $table->string('phone',50);
             $table->string('school',50);
             $table->dateTime('absent')->nullable();
             $table->integer('point_1');

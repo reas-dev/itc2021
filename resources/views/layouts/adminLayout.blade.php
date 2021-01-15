@@ -14,10 +14,14 @@
 </head>
 
 <body class="grey lighten-4">
+
     <nav>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <div class="nav-wrapper teal">
             <a href="{{ url('/admin') }}" class="brand-logo ml-3">ITC Admin Panel</a>
             <ul class="right hide-on-med-and-down mr-3">
+                <li class="{{ (request()->is('observer')) ? 'active' : '' }}"><a class="white-text waves-effect"
+                    href="{{ url('observer') }}">Observer</a></li>
                 <li class="{{ (request()->is('admin/participant/table')) ? 'active' : '' }}"><a
                         href="{{ url('/admin/participant/table') }}">Peserta</a></li>
                 <li class="{{ (request()->is('admin/observer/table')) ? 'active' : '' }}"><a
@@ -38,6 +42,20 @@
         <li><a href="{{ url('/admin/competition/statistic') }}">Statistik</a></li>
         <li><a href="{{ url('/admin/competition/session-panel') }}">Sesi</a></li>
         <li><a href="{{ url('/admin/competition/eliminate') }}">Eliminasi</a></li>
+    </ul>
+
+    <ul id="slide-out" class="sidenav teal">
+        <li class="{{ (request()->is('admin')) ? 'active' : '' }}"><a class="white-text waves-effect"
+                href="{{ url('admin') }}"><i class="white-text material-icons">home</i>Home</a></li>
+        <li>
+        <div class="divider"></div>
+        <li class="{{ (request()->is('observer')) ? 'active' : '' }}"><a class="white-text waves-effect"
+                href="{{ url('observer') }}"><i class="white-text material-icons">person</i>Observer</a></li>
+        <li>
+        <div class="divider"></div>
+        <li class=""><a class="white-text waves-effect" href="{{ url('logout') }}"><i
+                    class="white-text material-icons">power_settings_new</i>Logout</a>
+        </li>
     </ul>
 
     <ul id="competition_controlll" class="dropdown-content">

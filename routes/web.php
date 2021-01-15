@@ -17,10 +17,15 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('/tes', 'ParticipantController@show');
+
 Auth::routes();
 
 Route::get('/logout', 'HomeController@logout');
 
+// Public Route
+Route::get('/peserta', 'PublicController@showPeserta');
+Route::get('/lihat-soal', 'PublicController@showQuestion');
 
 // Admin Routes
 Route::group(['middleware' => ['admin','auth'], 'prefix' => 'admin'], function(){
@@ -114,47 +119,23 @@ Route::group(['middleware' => ['admin','auth'], 'prefix' => 'admin'], function()
 });
 
 // Observer Route
-Route::group(['middleware' => ['auth','observer'], 'prefix' => 'observer'], function(){
-    // Participant
-    // Route::group(['prefix' => 'participant'], function(){
-    //     // Table
-    //     Route::get('table', 'ObserverParticipantController@showParticipantsTable');
-
-    //     // Add
-    //     Route::get('add', 'ObserverParticipantController@showAddParticipant');
-    //     Route::post('add', 'ObserverParticipantController@addParticipant');
-
-    Route::get('/', 'ObserverController@showHome');
-
-    Route::get('/participant/table', 'ObserverParticipantController@participantsTable');
-    Route::get('/participant/add', 'ObserverParticipantController@showCreate');
-    Route::put('/participant/add', 'ObserverParticipantController@create');
-
-    // Update
-    Route::get('update/{participant}', 'ObserverCompetitionController@showUpdateParticipant');
-    Route::patch('update/{participant}', 'ObserverCompetitionController@updateParticipant');
-
-    // Delete
-    Route::get('/delete/{participant}', 'ObserverCompetitionController@deleteParticipant');
-
-    //     // Delete
-    //     Route::delete('delete', 'ObserverParticipantController@deleteParticipant');
-    // });
-    // Route::get('/', 'ObserverParticipantController@showParticipantsTable');
-    // Competition
-    Route::group(['prefix' => 'competition'], function(){
-
-        Route::get('/', 'ObserverParticipantController@gotoAnswer');
-        // Answer
-        Route::get('answer', 'ObserverCompetitionController@showAnswer');
-        Route::patch('answer', 'ObserverCompetitionController@answer');
-    });
+Route::group(['middleware' => ['auth','admin'], 'prefix' => 'observer'], function(){
+    Route::get('/', 'ObserverController@show');
+    Route::get('answer', 'ObserverController@showScoring');
+    Route::post('answer', 'ObserverController@scoring');
 });
 
-Route::group(['middleware' => ['auth','finale'], 'prefix' => 'participant'], function(){
-    Route::get('/', 'ParticipantCompetitionController@show');
-    Route::get('final', 'ParticipantCompetitionController@finale');
-    Route::patch('final', 'ParticipantCompetitionController@finaleSubmit');
+Route::group(['middleware' => ['auth','participant'], 'prefix' => 'participant'], function(){
+    Route::get('/', 'ParticipantController@show');
+    Route::get('profile', 'ParticipantController@showProfile');
+    Route::get('profile/edit', 'ParticipantController@showUpdateProfile');
+    Route::post('profile/edit', 'ParticipantController@updateProfile');
+    Route::get('answer', 'ParticipantController@showAnswer');
+    Route::post('answer/a', 'ParticipantController@answerA');
+    Route::post('answer/b', 'ParticipantController@answerB');
+    Route::post('answer/c', 'ParticipantController@answerC');
+    Route::post('answer/d', 'ParticipantController@answerD');
+    Route::post('answer/z', 'ParticipantController@answerNo');
 });
 
 Route::group(['middleware' => ['auth','admin'], 'prefix' => 'absent'], function(){
